@@ -72,6 +72,12 @@ uint sensors_battery   ( void );
 
 
 /* ==========================================================================
+ * Bump detection
+ */
+bool sensors_bump      ( void );
+
+
+/* ==========================================================================
  * Control buttons
  */
 bool sensors_startBtn ( void );
