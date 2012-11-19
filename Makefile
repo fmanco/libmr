@@ -30,7 +30,7 @@ upload:
 
 clean:
 	find . -regex ".*\(\.\(hex\|o\|elf\|map\)\|\(~\)\)" -delete -printf "deleted: %p\n"
-	rm -r doc/latex doc/html
+	rm -rf doc/latex doc/html
 
 
 .PHONY: all doc upload clean
