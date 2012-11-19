@@ -19,6 +19,12 @@
 /* ========================================================================== */
 
 /* ===================
+ * Beacon sensor
+ */
+static int beaconOn    = 0;
+static int beaconCount = 0;
+
+/* ===================
  * Ground sensors
  */
 static uint groundCount[5] = {0, 0, 0, 0, 0};
@@ -38,6 +44,7 @@ static int battery = 0;
 
 /* ========================================================================== */
 
+static void updateBeacon        ( void );
 static void updateGroundSensors ( void );
 static void updateBattery       ( void );
 
@@ -55,15 +62,18 @@ void sensors_init ( void )
 	robot_enableObstSens();
 	robot_enableGroundSens();
 
+	beaconOn    = 0;
+	beaconCount = 0;
+
 	for (i = 0; i < 5; i++) {
 		groundCount[i] = 0;
 		groundOn[i] = false;
 	}
 
-	odoLeft  = 0;
-	odoRight = 0;
+	odoLeft    = 0;
+	odoRight   = 0;
 
-	battery  = 0;
+	battery    = 0;
 }
 
 void sensors_update ( void )
@@ -104,8 +114,29 @@ int sensors_obstR ( void )
 	return sensors.obst_sens_right;
 }
 
+/* ==========================================================================
+ * Beacon search
+ */
+
+bool sensors_beacon ( void )
+{
+	return beaconOn;
+}
+
+/* \todo Implement sensors_beaconDir
+ *
+ * Unlike what was done before the values used to calculate the beacon
+ * position should be the real value applied to the servo instead of the
+ * value in degrees requested by the user.
+ */
+
 
 /* ========================================================================== */
+
+static void updateBeacon ( void )
+{
+	stBinSens(robot_readBeaconSens(), &beaconOn, &beaconCount, BEACON_ST_THRESHOLD);
+}
 
 static void updateGroundSensors ( void )
 {
