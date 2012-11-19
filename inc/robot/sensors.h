@@ -40,8 +40,8 @@ void sensors_stop     ( void );
 /* ==========================================================================
  * Obstacles detection
  */
-int  sensors_obstC     ( void );
 int  sensors_obstL     ( void );
+int  sensors_obstC     ( void );
 int  sensors_obstR     ( void );
 
 

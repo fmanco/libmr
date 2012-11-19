@@ -85,6 +85,25 @@ void sensors_stop ( void )
 	robot_disableGroundSens();
 }
 
+/* ==========================================================================
+ * Obstacles detection
+ */
+
+int sensors_obstL ( void )
+{
+	return sensors.obst_sens_left;
+}
+
+int sensors_obstC ( void )
+{
+	return sensors.obst_sens_front;
+}
+
+int sensors_obstR ( void )
+{
+	return sensors.obst_sens_right;
+}
+
 
 /* ========================================================================== */
 
