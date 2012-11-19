@@ -94,7 +94,7 @@ int sensors_obstL ( void )
 	return sensors.obst_sens_left;
 }
 
-int sensors_obstC ( void )
+int sensors_obstF ( void )
 {
 	return sensors.obst_sens_front;
 }
