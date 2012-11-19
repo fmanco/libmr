@@ -137,10 +137,10 @@ void robot_resetLed          ( int ledNr );
  * Utilities
  */
 
-#define waitStep10ms() while(!clock.tick10ms); clock.tick10ms = 0
-#define waitStep20ms() while(!clock.tick20ms); clock.tick20ms = 0
-#define waitStep40ms() while(!clock.tick40ms); clock.tick40ms = 0
-#define waitStep80ms() while(!clock.tick80ms); clock.tick80ms = 0
+#define waitStep10ms() while(!ticker.tick10ms); ticker.tick10ms = 0
+#define waitStep20ms() while(!ticker.tick20ms); ticker.tick20ms = 0
+#define waitStep40ms() while(!ticker.tick40ms); ticker.tick40ms = 0
+#define waitStep80ms() while(!ticker.tick80ms); ticker.tick80ms = 0
 
 
 /* ========================================================================== */
