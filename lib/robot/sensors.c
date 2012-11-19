@@ -188,6 +188,15 @@ void sensors_odo ( int* odoL, int* odoR )
 }
 
 /* ==========================================================================
+ * Battery level
+ */
+
+uint sensors_battery ( void )
+{
+	return battery;
+}
+
+/* ==========================================================================
  * Control buttons
  */
 
