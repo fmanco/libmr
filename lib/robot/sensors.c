@@ -133,6 +133,35 @@ bool sensors_beacon ( void )
  */
 
 /* ==========================================================================
+ * Target area and line detection (Ground sensors)
+ */
+
+bool sensors_groundL ( void )
+{
+	return groundOn[0];
+}
+
+bool sensors_groundCL ( void )
+{
+	return groundOn[1];
+}
+
+bool sensors_groundCF ( void )
+{
+	return groundOn[2];
+}
+
+bool sensors_groundCR ( void )
+{
+	return groundOn[3];
+}
+
+bool sensors_groundR ( void )
+{
+	return groundOn[4];
+}
+
+/* ==========================================================================
  * Encoders and odometry
  */
 
@@ -156,6 +185,15 @@ void sensors_odo ( int* odoL, int* odoR )
 	if (odoR != NULL) {
 		(*odoR) = odoRight;
 	}
+}
+
+/* ==========================================================================
+ * Battery level
+ */
+
+uint sensors_battery ( void )
+{
+	return battery;
 }
 
 /* ==========================================================================
