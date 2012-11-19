@@ -111,7 +111,7 @@ bool sensors_groundR   ( void );
  * \return true if at least two of the three center sensors
  *         are on and false otherwise
  */
-bool sensors_groundR   ( void );
+bool sensors_groundC   ( void );
 
 
 /* ==========================================================================

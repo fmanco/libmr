@@ -161,6 +161,11 @@ bool sensors_groundR ( void )
 	return groundOn[4];
 }
 
+bool sensors_groundC ( void )
+{
+	return ((groundOn[1] + groundOn[2] + groundOn[3]) >= 2);
+}
+
 /* ==========================================================================
  * Encoders and odometry
  */
