@@ -23,6 +23,14 @@
 
 
 /* ==========================================================================
+ * Configuration values [can be changed]
+ */
+
+#define GROUND_ST_THRESHOLD 5
+#define BEACON_ST_THRESHOLD 10
+
+
+/* ==========================================================================
  * Management
  */
 void sensors_init     ( void );
@@ -33,8 +41,8 @@ void sensors_stop     ( void );
 /* ==========================================================================
  * Obstacles detection
  */
-int  sensors_obstC     ( void );
 int  sensors_obstL     ( void );
+int  sensors_obstF     ( void );
 int  sensors_obstR     ( void );
 
 
@@ -46,17 +54,71 @@ bool sensors_beaconDir ( void );
 
 
 /* ==========================================================================
- * Ground detection
+ * Target area and line detection (Ground sensors)
  */
-bool sensors_ground    ( void );
+
+/**
+ * \brief Get the *left most* ground sensor state.
+ *
+ * The value provided was properly filtered.
+ *
+ * \return true if the sensor is on and false otherwise
+ */
 bool sensors_groundL   ( void );
+
+/**
+ * \brief Get the *center left* ground sensor state.
+ *
+ * The value provided was properly filtered.
+ *
+ * \return true if the sensor is on and false otherwise
+ */
+bool sensors_groundCL  ( void );
+
+/**
+ * \brief Get the *center front* ground sensor state.
+ *
+ * The value provided was properly filtered.
+ *
+ * \return true if the sensor is on and false otherwise
+ */
+bool sensors_groundCF  ( void );
+
+/**
+ * \brief Get the *center right* ground sensor state.
+ *
+ * The value provided was properly filtered.
+ *
+ * \return true if the sensor is on and false otherwise
+ */
+bool sensors_groundCR  ( void );
+
+/**
+ * \brief Get the *right most* ground sensor state.
+ *
+ * The value provided was properly filtered.
+ *
+ * \return true if the sensor is on and false otherwise
+ */
+bool sensors_groundR   ( void );
+
+/**
+ * \brief Get the state of the center ground sesnsor using
+ *        a combination of the three center sensors.
+ *
+ * The values used by this function are properly filtered.
+ *
+ * \return true if at least two of the three center sensors
+ *         are on and false otherwise
+ */
 bool sensors_groundR   ( void );
 
 
 /* ==========================================================================
- * Encoders
+ * Encoders and odometry
  */
 void sensors_encoders  ( int* encL, int* encR );
+void sensors_odo       ( int* odoL, int* odoR );
 
 
 /* ==========================================================================
