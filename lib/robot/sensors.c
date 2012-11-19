@@ -21,8 +21,8 @@
 /* ===================
  * Beacon sensor
  */
-static int beaconOn    = 0;
-static int beaconCount = 0;
+static bool beaconOn    = false;
+static int  beaconCount = 0;
 
 /* ===================
  * Ground sensors
@@ -80,6 +80,8 @@ void sensors_update ( void )
 {
 	robot_readSensors();
 	robot_readEncoders();
+
+	updateBeacon();
 
 	updateGroundSensors();
 
