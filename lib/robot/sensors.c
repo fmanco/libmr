@@ -130,6 +130,32 @@ bool sensors_beacon ( void )
  * value in degrees requested by the user.
  */
 
+/* ==========================================================================
+ * Encoders and odometry
+ */
+
+void sensors_encoders ( int* encL, int* encR )
+{
+	if (encL != NULL) {
+		(*encL) = sensors.enc_left;
+	}
+
+	if (encR != NULL) {
+		(*encR) = sensors.enc_right;
+	}
+}
+
+void sensors_odo ( int* odoL, int* odoR )
+{
+	if (odoL != NULL) {
+		(*odoL) = odoLeft;
+	}
+
+	if (odoR != NULL) {
+		(*odoR) = odoRight;
+	}
+}
+
 
 /* ========================================================================== */
 
