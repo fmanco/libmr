@@ -156,6 +156,20 @@ void sensors_odo ( int* odoL, int* odoR )
 	}
 }
 
+/* ==========================================================================
+ * Control buttons
+ */
+
+bool sensors_startBtn ( void )
+{
+	return robot_startBtn();
+}
+
+bool sensors_stopBtn ( void )
+{
+	return robot_stopBtn();
+}
+
 
 /* ========================================================================== */
 
