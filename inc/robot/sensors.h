@@ -54,9 +54,10 @@ bool sensors_groundR   ( void );
 
 
 /* ==========================================================================
- * Encoders
+ * Encoders and odometry
  */
 void sensors_encoders  ( int* encL, int* encR );
+void sensors_odo       ( int* odoL, int* odoR );
 
 
 /* ==========================================================================
