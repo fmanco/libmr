@@ -25,6 +25,12 @@ static uint groundCount[5] = {0, 0, 0, 0, 0};
 static bool groundOn[5]    = {false, false, false, false, false};
 
 /* ===================
+ * Odometry
+ */
+static int odoLeft  = 0;
+static int odoRight = 0;
+
+/* ===================
  * Battery
  */
 static int battery = 0;
@@ -54,7 +60,10 @@ void sensors_init ( void )
 		groundOn[i] = false;
 	}
 
-	battery = 0;
+	odoLeft  = 0;
+	odoRight = 0;
+
+	battery  = 0;
 }
 
 void sensors_update ( void )
@@ -63,6 +72,10 @@ void sensors_update ( void )
 	robot_readEncoders();
 
 	updateGroundSensors();
+
+	odoLeft  += sensors.enc_left;
+	odoRight += sensors.enc_right;
+
 	updateBattery();
 }
 
