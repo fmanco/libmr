@@ -32,9 +32,10 @@ static int battery = 0;
 
 /* ========================================================================== */
 
-static void handleGroundSensor  ( uint value, int sensNr );
 static void updateGroundSensors ( void );
 static void updateBattery       ( void );
+
+static inline void stBinSens ( uint value, bool* state, uint* count, uint threshold );
 
 
 /* ==========================================================================
@@ -74,32 +75,13 @@ void sensors_stop ( void )
 
 /* ========================================================================== */
 
-static inline void handleGroundSensor ( uint value, int sensNr )
-{
-	if (value) {
-		if (groundCount[sensNr] < GROUND_ST_THRESHOLD)
-			groundCount[sensNr]++;
-	} else {
-		if (groundCount[sensNr] > 0)
-			groundCount[sensNr]--;
-	}
-
-	if (groundOn[sensNr]) {
-		if (groundCount[sensNr] == 0)
-			groundOn[sensNr] = false;
-	} else {
-		if (groundCount[sensNr] == GROUND_ST_THRESHOLD)
-			groundOn[sensNr] = true;
-	}
-}
-
 static void updateGroundSensors ( void )
 {
 	int i;
 	uint sens = sensors.ground;
 
 	for (i = 0; i < 5; i++) {
-		handleGroundSensor((sens & (1 << i)), i);
+		stBinSens((sens & (1 << i)), groundOn + i, groundCount + i, GROUND_ST_THRESHOLD);
 	}
 }
 
@@ -129,6 +111,33 @@ static void updateBattery ( void )
 	i = (i + 1) & 0x1F;
 
 	battery = (sum >> 5);
+}
+
+
+/* ===================
+ * Schmitt Trigger like algorithm for handling binary sensors.
+ */
+static inline void stBinSens ( uint value, bool* state, uint* count, uint threshold )
+{
+	if (value) {
+		if ((*count) < threshold) {
+			(*count)++;
+		}
+	} else {
+		if ((*count) > 0) {
+			(*count)--;
+		}
+	}
+
+	if ((*state)) {
+		if ((*count) == 0) {
+			(*state) = false;
+		}
+	} else {
+		if ((*count) == threshold) {
+			(*state) = true;
+		}
+	}
 }
 
 
