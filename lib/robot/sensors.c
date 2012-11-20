@@ -4,6 +4,7 @@
 
 /**
  *  \file  lib/robot/sensors.c
+ *  \brief Implement sensors interface.
  *
  *  \version 0.1.0
  *  \date    Nov 2012
