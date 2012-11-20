@@ -32,6 +32,12 @@
  * Configuration values [can be changed]
  */
 
+/* ===================
+ * Library operation
+ * \todo Comment on what this does exactly.
+ */
+/* #define SOFT_SLOPE */
+
 
 /* ========================================================================== */
 

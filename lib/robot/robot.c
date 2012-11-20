@@ -58,11 +58,6 @@
 #define SERVO_K       ((((SERVO_WIDTH_MAX - SERVO_WIDTH_MIN) * T2_FREQ) / 1000) / SERVO_LEVELS)
 #define SERVO_MIN_PWM_IS_RIGHT
 
-/* ===================
- * Operation configurations
- */
-/* #define SOFT_SLOPE */
-
 
 /* ========================================================================== */
 
