@@ -62,9 +62,9 @@ typedef union {
 
 	struct {
 		int obst[3];
-		int enc[2];
 		int battery;
 		int ground;
+		int enc[2];
 	};
 
 	int array[5];
