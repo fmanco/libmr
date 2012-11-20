@@ -70,6 +70,13 @@ typedef union {
 	int array[5];
 } mrSens;
 
+typedef struct {
+	int vel_right;
+	int vel_left;
+	int servo_pos;
+	int leds;
+} mrActs;
+
 typedef union {
 	struct {
 		uint tick10ms:1;
@@ -90,6 +97,7 @@ typedef union {
 
 // \todo Check volatiles
 volatile extern mrSens  sensors;
+volatile extern mrActs  actuators;
 volatile extern mrClock ticker;
 
 
