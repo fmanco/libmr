@@ -32,14 +32,6 @@
  * Configuration values [can be changed]
  */
 
-/* ====================
- * Servo calibration values
- * \todo As this MUST be set for each robot maybe this should be moved
- *       to a better place
- */
-#define SERVO_WIDTH_MIN 700	 /* 0.7 ms */
-#define SERVO_WIDTH_MAX 2200 /* 2.2 ms */
-
 
 /* ========================================================================== */
 

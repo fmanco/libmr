@@ -16,6 +16,7 @@
 
 #include <base.h>
 #include <robot/robot.h>
+#include <robot/conf.h>
 #include <detpic32.h>
 
 
