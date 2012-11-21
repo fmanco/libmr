@@ -23,6 +23,9 @@ all:
 	CPATH=$(INC) pcompile $(APP) $(LIB)
 
 doc:
+	echo -e '/**\n * @mainpage\n *' > readme.dox
+	sed "s/^/ \* /g" readme.md >> readme.dox
+	echo ' */' >> readme.dox
 	doxygen doc/Doxyfile
 
 upload:
@@ -30,7 +33,7 @@ upload:
 
 clean:
 	find . -regex ".*\(\.\(hex\|o\|elf\|map\)\|\(~\)\)" -delete -printf "deleted: %p\n"
-	rm -rf doc/latex doc/html
+	rm -rf doc/latex doc/html readme.dox
 
 
 .PHONY: all doc upload clean

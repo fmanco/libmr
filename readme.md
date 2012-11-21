@@ -1,4 +1,4 @@
-# mrlib - A <del>low level</del> not so low level library for Micro Rato
+# mrlib - A not so low level library for Micro Rato
 
 mrlib is a C library to program a [Micro Rato], providing from the low level
 interaction with the robot, to more high level movements, like precise
