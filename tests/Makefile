@@ -24,7 +24,7 @@ all:
 	CPATH=$(INC) pcompile $^ $(LIB)
 
 upload:
-	ldpic32 -w $(patsubst %.c, %.hex, $(APP))
+	ldpic32 -w $(patsubst %.c, %.hex, $(shell find *.hex))
 
 clean:
 	find .. -regex ".*\(\.\(hex\|o\|elf\|map\)\|\(~\)\)" -delete -printf "deleted: %p\n"
