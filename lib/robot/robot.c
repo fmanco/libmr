@@ -62,10 +62,8 @@
 /* ========================================================================== */
 
 volatile mrSens  sensors;
+volatile mrActs  actuators;
 volatile mrClock ticker;
-
-static int velLeft  = 0;
-static int velRight = 0;
 
 static int counter_m1 = 0;
 static int counter_m2 = 0;
@@ -292,8 +290,8 @@ void robot_setVel2 ( int velL, int velR )
 {
 	DisableInterrupts();
 
-	velLeft  = velL > 100 ? 100 : (velL < -100 ? -100 : velL);
-	velRight = velR > 100 ? 100 : (velR < -100 ? -100 : velR);
+	actuators.vel_left  = velL > 100 ? 100 : (velL < -100 ? -100 : velL);
+	actuators.vel_right = velR > 100 ? 100 : (velR < -100 ? -100 : velR);
 
 	EnableInterrupts();
 }
@@ -311,6 +309,7 @@ void robot_setServo ( int pos )
 	pos += SERVO_POS_RIGHT; // PWM is minimum @ right position
 #endif
 
+	actuators.servo_pos = pos;
 	OC5RS = ((SERVO_WIDTH_MIN * T2_FREQ) / 1000  + pos * SERVO_K) + 1;
 }
 
@@ -320,6 +319,7 @@ void robot_setLed ( int ledNr )
 		return;
 
 	LATE = LATE | (1 << ledNr);
+	actuators.leds = LATE & 0x0f;
 }
 
 void robot_resetLed ( int ledNr )
@@ -328,6 +328,7 @@ void robot_resetLed ( int ledNr )
 		return;
 
 	LATE = LATE & ~(1 << ledNr);
+	actuators.leds = LATE & 0x0f;
 }
 
 
@@ -443,11 +444,11 @@ void _int_(_TIMER_2_VECTOR) isr_t2(void)
 	if((cntT2Ticks % 2) == 0)
 #endif
 	{
-		velL = velLeft;
-//		velL = avfilter_mleft(velLeft);
+		velL = actuators.vel_left;
+//		velL = avfilter_mleft(actuators.vel_left);
 
-		velR = velRight;
-//		velR = avfilter_mright(velRight);
+		velR = actuators.vel_right;
+//		velR = avfilter_mright(actuators.vel_right);
 
 		if(velL < 0) {
 			velL = -velL;
