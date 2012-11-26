@@ -1,4 +1,5 @@
 /* ==========================================================================
+
  * mrlib - A lowlevel library for "Micro Rato"
  * ========================================================================== */
 
@@ -32,10 +33,8 @@ void actuators_stop    ( void );
 /* ==========================================================================
  * Motors
  */
-void actuators_setSP   ( int left, int right );
-void actuators_setSPMS ( int left, int right );
-void actuators_getSP   ( int* left, int* right );
-void actuators_getSPMS ( int* left, int* right );
+void actuators_setVel ( int left, int right );
+void actuators_getVel ( int* left, int* right );
 
 
 /* ==========================================================================
