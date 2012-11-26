@@ -139,12 +139,12 @@ bool sensors_beacon ( void )
 
 bool sensors_groundL ( void )
 {
-	return groundOn[0];
+	return groundOn[4];
 }
 
 bool sensors_groundCL ( void )
 {
-	return groundOn[1];
+	return groundOn[3];
 }
 
 bool sensors_groundCF ( void )
@@ -154,12 +154,12 @@ bool sensors_groundCF ( void )
 
 bool sensors_groundCR ( void )
 {
-	return groundOn[3];
+	return groundOn[1];
 }
 
 bool sensors_groundR ( void )
 {
-	return groundOn[4];
+	return groundOn[0];
 }
 
 bool sensors_groundC ( void )
