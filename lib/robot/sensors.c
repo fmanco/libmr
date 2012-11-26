@@ -86,7 +86,7 @@ void sensors_update ( void )
 
 	updateGroundSensors();
 
-	odoLeft  += sensors.enc_left;
+	odoLeft  -= sensors.enc_left;
 	odoRight += sensors.enc_right;
 
 	updateBattery();
@@ -174,7 +174,7 @@ bool sensors_groundC ( void )
 void sensors_encoders ( int* encL, int* encR )
 {
 	if (encL != NULL) {
-		(*encL) = sensors.enc_left;
+		(*encL) = -sensors.enc_left;
 	}
 
 	if (encR != NULL) {
