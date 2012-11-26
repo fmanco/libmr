@@ -68,7 +68,7 @@ typedef union {
 		int enc[2];
 	};
 
-	int array[5];
+	int array[7];
 } mrSens;
 
 typedef union {
