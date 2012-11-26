@@ -39,12 +39,31 @@
 #define SERVO_WIDTH_MIN  700
 #define SERVO_WIDTH_MAX 2200
 
+#define SERVO_DEGREE_MIN // \todo Define SERVO_DEGREE_MIN
+#define SERVO_DEGREE_MAX // \todo Define SERVO_DEGREE_MAX
+
+
 /* ====================
  * PI Control
  */
 #define PI_KP     8
 #define PI_KI     3
 #define PI_LIMIT 15
+
+
+/* ====================
+ * Wheels and encoders calibration
+ */
+
+/**
+ * \def Define the robot encoders' ticks per revolution.
+ */
+#define ENC_TPR               // \todo Define ENC_TPR
+
+/**
+ * \def Define the robot wheel circumference in milimeters.
+ */
+#define WHEEL_CIRC            // \todo Define WHEEL_CIRC
 
 
 /* ========================================================================== */
