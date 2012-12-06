@@ -58,12 +58,12 @@
 /**
  * \def Define the robot encoders' ticks per revolution.
  */
-#define ENC_TPR               // \todo Define ENC_TPR
+#define ENC_TPR    1          // \todo Define ENC_TPR
 
 /**
  * \def Define the robot wheel circumference in milimeters.
  */
-#define WHEEL_CIRC            // \todo Define WHEEL_CIRC
+#define WHEEL_CIRC 1          // \todo Define WHEEL_CIRC
 
 
 /* ========================================================================== */
