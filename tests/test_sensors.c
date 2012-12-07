@@ -31,17 +31,17 @@ int main ( void )
 
 		sensors_update();
 
-		int encL = 0, encR = 0;
-		int odoL = 0, odoR = 0;
+		int odoPL = 0, odoPR = 0;
+		int odoIL = 0, odoIR = 0;
 
-		sensors_encoders(&encL, &encR);
-		sensors_odo(&odoL, &odoR);
+		sensors_odoPart (&odoPL, &odoPR);
+		sensors_odoInt  (&odoIL, &odoIR);
 
 		printf("%3d %3d %3d | %d | %d%d%d%d%d | %3d %3d %5d %5d | %3d | %d%d\n",
 			sensors_obstL(), sensors_obstF(), sensors_obstR(),
 			sensors_beacon(),
 			sensors_groundL(), sensors_groundCL(), sensors_groundCF(), sensors_groundCR(), sensors_groundR(),
-			encL, encR, odoL, odoR,
+			odoPL, odoPR, odoIL, odoIR,
 			sensors_battery(),
 			sensors_startBtn(), sensors_stopBtn());
 	}

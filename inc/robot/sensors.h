@@ -117,8 +117,8 @@ bool sensors_groundC   ( void );
 /* ==========================================================================
  * Encoders and odometry
  */
-void sensors_encoders  ( int* encL, int* encR );
-void sensors_odo       ( int* odoL, int* odoR );
+void sensors_odoPart   ( int* odoL, int* odoR );
+void sensors_odoInt    ( int* odoL, int* odoR );
 
 
 /* ==========================================================================

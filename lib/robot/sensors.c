@@ -15,6 +15,7 @@
 #include <base.h>
 #include <robot/robot.h>
 #include <robot/sensors.h>
+#include <robot/conf.h>
 
 
 /* ========================================================================== */
@@ -32,10 +33,12 @@ static uint groundCount[5] = {0, 0, 0, 0, 0};
 static bool groundOn[5]    = {false, false, false, false, false};
 
 /* ===================
- * Odometry
+ * Odometry (in millimeters)
  */
-static int odoLeft  = 0;
-static int odoRight = 0;
+static int odoPartLeft  = 0;
+static int odoPartRight = 0;
+static int odoIntLeft   = 0;
+static int odoIntRight  = 0;
 
 /* ===================
  * Battery
@@ -45,9 +48,19 @@ static int battery = 0;
 
 /* ========================================================================== */
 
+/*
+ * Distance per encoder tick in  micrometers.
+ * Micrometers are used because mm would probably lead to truncation.
+ */
+#define ENC_DIST_PER_TICK ((WHEEL_CIRC * 1000) / ENC_TPR)  // \todo Check roundings
+
+
+/* ========================================================================== */
+
 static void updateBeacon        ( void );
 static void updateGroundSensors ( void );
 static void updateBattery       ( void );
+static void updateOdometry      ( void );
 
 static inline void stBinSens ( uint value, bool* state, uint* count, uint threshold );
 
@@ -71,10 +84,12 @@ void sensors_init ( void )
 		groundOn[i] = false;
 	}
 
-	odoLeft    = 0;
-	odoRight   = 0;
+	odoPartLeft  = 0;
+	odoPartRight = 0;
+	odoIntLeft   = 0;
+	odoIntRight  = 0;
 
-	battery    = 0;
+	battery = 0;
 }
 
 void sensors_update ( void )
@@ -83,12 +98,8 @@ void sensors_update ( void )
 	robot_readEncoders();
 
 	updateBeacon();
-
 	updateGroundSensors();
-
-	odoLeft  -= sensors.enc_left;
-	odoRight += sensors.enc_right;
-
+	updateOdometry();
 	updateBattery();
 }
 
@@ -171,25 +182,25 @@ bool sensors_groundC ( void )
  * Encoders and odometry
  */
 
-void sensors_encoders ( int* encL, int* encR )
-{
-	if (encL != NULL) {
-		(*encL) = -sensors.enc_left;
-	}
-
-	if (encR != NULL) {
-		(*encR) = sensors.enc_right;
-	}
-}
-
-void sensors_odo ( int* odoL, int* odoR )
+void sensors_odoPart ( int* odoL, int* odoR )
 {
 	if (odoL != NULL) {
-		(*odoL) = odoLeft;
+		(*odoL) = odoPartLeft / 10000;            // Convert to cm
 	}
 
 	if (odoR != NULL) {
-		(*odoR) = odoRight;
+		(*odoR) = odoPartRight / 10000;           // Convert to cm
+	}
+}
+
+void sensors_odoInt ( int* odoL, int* odoR )
+{
+	if (odoL != NULL) {
+		(*odoL) = odoIntLeft / 10000;             // Convert to cm
+	}
+
+	if (odoR != NULL) {
+		(*odoR) = odoIntRight / 10000;            // Convert to cm
 	}
 }
 
@@ -232,6 +243,15 @@ static void updateGroundSensors ( void )
 	for (i = 0; i < 5; i++) {
 		stBinSens((sens & (1 << i)), groundOn + i, groundCount + i, GROUND_ST_THRESHOLD);
 	}
+}
+
+static void updateOdometry ( void )
+{
+	odoPartLeft  = ENC_DIST_PER_TICK * (-sensors.enc_left);
+	odoPartRight = ENC_DIST_PER_TICK * sensors.enc_right;
+
+	odoIntLeft  += odoPartLeft;
+	odoIntRight += odoPartRight;
 }
 
 /* ===================
