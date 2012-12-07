@@ -1,6 +1,6 @@
 # libmr - A not so low level library for Micro Rato
 
-libmr is a C library to program a [Micro Rato], providing from the low level
+libmr is a C library to program a [Micro Rato][micro rato], providing from the low level
 interaction with the robot, to more high level movements, like precise
 rotations and obstacle avoidance.
 
@@ -22,4 +22,4 @@ together with it's high configurability, allows more advance users to implement
 their own low level algorithms.
 
 
-  [micro rato]: (http://microrato.ua.pt)
+  [micro rato]: http://microrato.ua.pt "Micro Rato @ UA"
