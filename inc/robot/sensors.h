@@ -53,7 +53,7 @@ int  sensors_obstR     ( void );
  */
 
 bool sensors_beacon    ( void );
-bool sensors_beaconDir ( void );
+int  sensors_beaconDir ( void );
 
 
 /* ==========================================================================
