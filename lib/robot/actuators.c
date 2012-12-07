@@ -121,6 +121,7 @@ void actuators_getVel ( int* left, int* right )
 }
 
 
+/* ========================================================================== */
 
 static void motorsPI ( void )
 {
@@ -144,5 +145,6 @@ static void motorsPI ( void )
 
 	robot_setVel2((PI_KP * errL) + (PI_KI * intL), (PI_KP * errR) + (PI_KP * intR));
 }
+
 
 /* = EOF ==================================================================== */

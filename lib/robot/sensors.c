@@ -109,6 +109,7 @@ void sensors_stop ( void )
 	robot_disableGroundSens();
 }
 
+
 /* ==========================================================================
  * Obstacles detection
  */
@@ -128,6 +129,7 @@ int sensors_obstR ( void )
 	return sensors.obst_sens_right;
 }
 
+
 /* ==========================================================================
  * Beacon search
  */
@@ -143,6 +145,7 @@ bool sensors_beacon ( void )
  * position should be the real value applied to the servo instead of the
  * value in degrees requested by the user.
  */
+
 
 /* ==========================================================================
  * Target area and line detection (Ground sensors)
@@ -178,6 +181,7 @@ bool sensors_groundC ( void )
 	return ((groundOn[1] + groundOn[2] + groundOn[3]) >= 2);
 }
 
+
 /* ==========================================================================
  * Encoders and odometry
  */
@@ -204,6 +208,7 @@ void sensors_odoInt ( int* odoL, int* odoR )
 	}
 }
 
+
 /* ==========================================================================
  * Battery level
  */
@@ -212,6 +217,7 @@ uint sensors_battery ( void )
 {
 	return battery;
 }
+
 
 /* ==========================================================================
  * Control buttons
@@ -281,7 +287,6 @@ static void updateBattery ( void )
 
 	battery = (sum >> 5);
 }
-
 
 /* ===================
  * Schmitt Trigger like algorithm for handling binary sensors.

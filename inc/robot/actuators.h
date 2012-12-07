@@ -1,5 +1,4 @@
 /* ==========================================================================
-
  * mrlib - A lowlevel library for "Micro Rato"
  * ========================================================================== */
 
@@ -25,6 +24,7 @@
 /* ==========================================================================
  * Management
  */
+
 void actuators_init    ( void );
 void actuators_update  ( void );
 void actuators_stop    ( void );
@@ -33,6 +33,7 @@ void actuators_stop    ( void );
 /* ==========================================================================
  * Motors
  */
+
 void actuators_setVel ( int left, int right );
 void actuators_getVel ( int* left, int* right );
 
@@ -40,6 +41,7 @@ void actuators_getVel ( int* left, int* right );
 /* ==========================================================================
  * Beacon sensor's servo
  */
+
 void actuators_setBeaconSens    ( int degree );
 void actuators_rotateBeaconSens ( int degree );
 
@@ -47,6 +49,7 @@ void actuators_rotateBeaconSens ( int degree );
 /* ==========================================================================
  * Leds
  */
+
 bool actuators_setLed  ( uint ledN, bool state );
 bool actuators_setLeds ( uint bitmap );
 

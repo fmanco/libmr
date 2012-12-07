@@ -33,6 +33,7 @@
 /* ==========================================================================
  * Management
  */
+
 void sensors_init     ( void );
 void sensors_update   ( void );
 void sensors_stop     ( void );
@@ -41,6 +42,7 @@ void sensors_stop     ( void );
 /* ==========================================================================
  * Obstacles detection
  */
+
 int  sensors_obstL     ( void );
 int  sensors_obstF     ( void );
 int  sensors_obstR     ( void );
@@ -49,6 +51,7 @@ int  sensors_obstR     ( void );
 /* ==========================================================================
  * Beacon search
  */
+
 bool sensors_beacon    ( void );
 bool sensors_beaconDir ( void );
 
@@ -117,6 +120,7 @@ bool sensors_groundC   ( void );
 /* ==========================================================================
  * Encoders and odometry
  */
+
 void sensors_odoPart   ( int* odoL, int* odoR );
 void sensors_odoInt    ( int* odoL, int* odoR );
 
@@ -124,24 +128,28 @@ void sensors_odoInt    ( int* odoL, int* odoR );
 /* ==========================================================================
  * Compass (simulated)
  */
+
 int  sensors_compass   ( void );
 
 
 /* ==========================================================================
  * Battery level
  */
+
 uint sensors_battery   ( void );
 
 
 /* ==========================================================================
  * Bump detection
  */
+
 bool sensors_bump      ( void );
 
 
 /* ==========================================================================
  * Control buttons
  */
+
 bool sensors_startBtn ( void );
 bool sensors_stopBtn  ( void );
 

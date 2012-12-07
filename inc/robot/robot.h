@@ -41,8 +41,8 @@
 
 /* ========================================================================== */
 
-#define SERVO_POS_LEFT      -15
-#define SERVO_POS_RIGHT      15
+#define SERVO_POS_LEFT  -15
+#define SERVO_POS_RIGHT  15
 
 #define M_MAXVEL  100
 #define M_MINVEL -100

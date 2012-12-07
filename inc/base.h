@@ -24,6 +24,7 @@
 /* ==========================================================================
  * Standard typedefs
  */
+
 typedef unsigned char  uchar  ;
 typedef unsigned short ushort ;
 typedef unsigned int   uint   ;
@@ -33,6 +34,7 @@ typedef unsigned long  ulong  ;
 /* ==========================================================================
  * Util Macros
  */
+
 #define abs(val) ((val) > 0 ? (val) : -(val))
 
 
