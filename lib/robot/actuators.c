@@ -150,6 +150,34 @@ void actuators_rotateBeaconSens ( int degree )
 	actuators_setBeaconSens(servoDegree + degree);
 }
 
+bool actuators_setLed ( uint ledN, bool state )
+{
+	if (ledN >= N_LEDS)
+		return false;
+
+	if (state) {
+		robot_setLed(ledN);
+	} else {
+		robot_resetLed(ledN);
+	}
+
+	return true;
+}
+
+void actuators_setLeds ( uint bitmap )
+{
+	uint i;
+	uint m;
+
+	for (i = 0, m = 1; i < N_LEDS; i++, m <<= 1) {
+		if (bitmap & m) {
+			robot_setLed(i);
+		} else {
+			robot_resetLed(i);
+		}
+	}
+}
+
 
 /* ========================================================================== */
 
