@@ -1,6 +1,6 @@
-# mrlib - A not so low level library for Micro Rato
+# libmr - A not so low level library for Micro Rato
 
-mrlib is a C library to program a [Micro Rato], providing from the low level
+libmr is a C library to program a [Micro Rato], providing from the low level
 interaction with the robot, to more high level movements, like precise
 rotations and obstacle avoidance.
 
@@ -17,7 +17,7 @@ on the development of high level algorithms to make the mouse find it's cheese.
  - Bump detection and control
  - Obstacle avoidance
 
-Beyond the high level interface, mrlib also exposes low level functions, which
+Beyond the high level interface, libmr also exposes low level functions, which
 together with it's high configurability, allows more advance users to implement
 their own low level algorithms.
 

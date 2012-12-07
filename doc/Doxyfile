@@ -4,7 +4,7 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 DOXYFILE_ENCODING      = UTF-8
-PROJECT_NAME           = "mrlib"
+PROJECT_NAME           = "libmr"
 PROJECT_NUMBER         = "0.1.0"
 PROJECT_BRIEF          = "A lowlevel library for Micro Rato"
 PROJECT_LOGO           =

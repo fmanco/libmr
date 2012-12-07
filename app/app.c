@@ -1,12 +1,12 @@
 /* ==========================================================================
- * mrlib - A lowlevel library for "Micro Rato"
+ * libmr - A lowlevel library for "Micro Rato"
  * ========================================================================== */
 
 /**
  *  \file  app/app.c
- *  \brief An example application for mrlib
+ *  \brief An example application for libmr
  *
- *  This can be used as a base template for a mrlib based application.
+ *  This can be used as a base template for a libmr based application.
  *
  *  \version 0.1.0
  *  \date    Nov 2012

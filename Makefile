@@ -1,11 +1,11 @@
 # ===========================================================================
-# mrlib - A lowlevel library for "Micro Rato"
+# libmr - A lowlevel library for "Micro Rato"
 # ===========================================================================
 
 ##
  #  \file Makefile
  #
- #  \brief Basic Makefile for a mrlib based application
+ #  \brief Basic Makefile for a libmr based application
  #
  #  This Makefile builds an application name app.c placed on app folder.
  #  It also allows to upload the application to the MCU.

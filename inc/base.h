@@ -1,10 +1,10 @@
 /* ==========================================================================
- * mrlib - A lowlevel library for "Micro Rato"
+ * libmr - A lowlevel library for "Micro Rato"
  * ========================================================================== */
 
 /**
  *  \file  inc/base.h
- *  \brief Basic definitions and utilities for mrlib
+ *  \brief Basic definitions and utilities for libmr
  *
  *
  *  \version 0.1.0
