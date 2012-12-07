@@ -34,6 +34,16 @@
 /* ========================================================================== */
 
 /* ====================
+ * Operation configurations
+ */
+
+/**
+ * \def Operation cicle time in miliseconds.
+ */
+#define CICLE_T 10
+
+
+/* ====================
  * Servo calibration values
  */
 #define SERVO_WIDTH_MIN  700
