@@ -7,7 +7,7 @@
  *  \brief Implement sensors interface.
  *
  *  \version 0.1.0
- *  \date    Nov 2012
+ *  \date    Dec 2012
  *
  *  \author Filipe Manco <filipe.manco@gmail.com>
  */
@@ -16,6 +16,7 @@
 #include <robot/robot.h>
 #include <robot/sensors.h>
 #include <robot/conf.h>
+#include <robot/state.h>
 
 
 /* ========================================================================== */
@@ -25,6 +26,7 @@
  */
 static bool beaconOn    = false;
 static int  beaconCount = 0;
+static int  beaconDir   = 0;
 
 /* ===================
  * Ground sensors
@@ -78,6 +80,7 @@ void sensors_init ( void )
 
 	beaconOn    = 0;
 	beaconCount = 0;
+	beaconDir   = 0;
 
 	for (i = 0; i < 5; i++) {
 		groundCount[i] = 0;
@@ -139,12 +142,13 @@ bool sensors_beacon ( void )
 	return beaconOn;
 }
 
-/* \todo Implement sensors_beaconDir
- *
- * Unlike what was done before the values used to calculate the beacon
- * position should be the real value applied to the servo instead of the
- * value in degrees requested by the user.
- */
+int sensors_beaconDir ( void )
+{
+	/* Even if the beacon isn't visible
+	 * return the last known direction
+	 */
+	return beaconDir;
+}
 
 
 /* ==========================================================================
@@ -239,6 +243,9 @@ bool sensors_stopBtn ( void )
 static void updateBeacon ( void )
 {
 	stBinSens(robot_readBeaconSens(), &beaconOn, &beaconCount, BEACON_ST_THRESHOLD);
+
+	if (beaconOn)
+		beaconDir = state_getServoDegree();
 }
 
 static void updateGroundSensors ( void )
