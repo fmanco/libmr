@@ -29,10 +29,21 @@ static int spRight  = 0;
 static int velLeft  = 0;
 static int velRight = 0;
 
+/* ===================
+ * Beacon servo
+ */
+static int servoDegree = 0;
+
 
 /* ========================================================================== */
 
 #define ENC_DIST_PER_TICK ((WHEEL_CIRC * 1000) / ENC_TPR)  // \todo Check roundings
+
+#define SERVO_DEGREE_RANGE (SERVO_DEGREE_MAX - SERVO_DEGREE_MIN)
+#define SERVO_POS_RANGE    (SERVO_POS_RIGHT - SERVO_POS_LEFT)
+
+#define SERVO_DEGREE_TO_POS(degree) \
+		(int) ((1.0 * SERVO_POS_RANGE / SERVO_DEGREE_RANGE) * degree)
 
 
 /* ========================================================================== */
@@ -50,6 +61,8 @@ void actuators_init ( void )
 	spRight  = 0;
 	velLeft  = 0;
 	velRight = 0;
+
+	servoDegree = 0;
 
 	robot_setVel2(0, 0);
 
@@ -118,6 +131,23 @@ void actuators_getVel ( int* left, int* right )
 	if (right != NULL) {
 		(*right) = velRight;
 	}
+}
+
+void actuators_setBeaconSens ( int degree )
+{
+	servoDegree = degree;
+
+	/* \todo Should this be done only on actuators.update?
+	 *
+	 * If this is to be done here, then we should strictly define
+	 *  what is synchronous and what is asynchronous.
+	 */
+	robot_setServo(SERVO_DEGREE_TO_POS(servoDegree));
+}
+
+void actuators_rotateBeaconSens ( int degree )
+{
+	actuators_setBeaconSens(servoDegree + degree);
 }
 
 
