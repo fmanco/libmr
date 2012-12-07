@@ -48,8 +48,8 @@
 #define SERVO_WIDTH_MIN  700
 #define SERVO_WIDTH_MAX 2200
 
-#define SERVO_DEGREE_MIN // \todo Define SERVO_DEGREE_MIN
-#define SERVO_DEGREE_MAX // \todo Define SERVO_DEGREE_MAX
+#define SERVO_DEGREE_MIN -80 // \todo Define SERVO_DEGREE_MIN
+#define SERVO_DEGREE_MAX  80 // \todo Define SERVO_DEGREE_MAX
 
 
 /* ==========================================================================
