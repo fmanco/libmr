@@ -17,6 +17,7 @@
 #include <robot/actuators.h>
 #include <robot/robot.h>
 #include <robot/conf.h>
+#include <robot/state.h>
 
 
 /* ========================================================================== */
@@ -44,6 +45,9 @@ static int servoDegree = 0;
 
 #define SERVO_DEGREE_TO_POS(degree) \
 		(int) ((1.0 * SERVO_POS_RANGE / SERVO_DEGREE_RANGE) * degree)
+
+#define SERVO_POS_TO_DEGREE(pos) \
+		(int) (pos / (1.0 * SERVO_POS_RANGE / SERVO_DEGREE_RANGE))
 
 
 /* ========================================================================== */
@@ -135,14 +139,21 @@ void actuators_getVel ( int* left, int* right )
 
 void actuators_setBeaconSens ( int degree )
 {
+	int pos;
+	int effectiveDegree;
+
 	servoDegree = degree;
+
+	pos = SERVO_DEGREE_TO_POS(servoDegree);
+	effectiveDegree = SERVO_POS_TO_DEGREE(pos);
 
 	/* \todo Should this be done only on actuators.update?
 	 *
 	 * If this is to be done here, then we should strictly define
 	 *  what is synchronous and what is asynchronous.
 	 */
-	robot_setServo(SERVO_DEGREE_TO_POS(servoDegree));
+	robot_setServo(pos);
+	state_setServoDegree(effectiveDegree);
 }
 
 void actuators_rotateBeaconSens ( int degree )
