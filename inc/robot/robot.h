@@ -47,6 +47,12 @@
 #define M_MAXVEL  100
 #define M_MINVEL -100
 
+/**
+ * \def Define the number of leds available in the robot.
+ *      The leds are numbered in the range [0, N_LEDS - 1].
+ */
+#define N_LEDS 4
+
 
 /* ========================================================================== */
 
