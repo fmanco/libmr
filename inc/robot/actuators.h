@@ -51,7 +51,7 @@ void actuators_rotateBeaconSens ( int degree );
  */
 
 bool actuators_setLed  ( uint ledN, bool state );
-bool actuators_setLeds ( uint bitmap );
+void actuators_setLeds ( uint bitmap );
 
 
 /* ========================================================================== */
