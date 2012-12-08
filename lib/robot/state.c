@@ -24,6 +24,9 @@
 
 static int servoDegree = 0;
 
+static int spLeft      = 0;
+static int spRight     = 0;
+
 
 /* ========================================================================== */
 
@@ -35,6 +38,23 @@ inline void state_setServoDegree ( int degree )
 inline int state_getServoDegree ( void )
 {
 	return servoDegree;
+}
+
+inline void state_setSP ( int left, int right )
+{
+	spLeft  = left;
+	spRight = right;
+}
+
+inline void state_getSP ( int* left, int* right )
+{
+	if (left != NULL) {
+		(*left) = spLeft;
+	}
+
+	if (right != NULL) {
+		(*right) = spRight;
+	}
 }
 
 

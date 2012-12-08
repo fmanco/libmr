@@ -40,6 +40,27 @@ inline void state_setServoDegree ( int degree );
  */
 inline int  state_getServoDegree ( void );
 
+/**
+ * \brief Define the last setpoints applied to the motors.
+ *
+ * \param left  The SP applied to the left motor.
+ * \param right The SP applied to the right motor.
+ */
+inline void state_setSP ( int left, int right );
+
+/**
+ * \brief Get the last setpoints applied to the motors.
+ *
+ * The arguments can be NULL, in wich case the value is not returned.
+ * This is usefull for retrieving only one of the values.
+ *
+ * \param left Pointer to the location
+ *         where the left SP is to be stored, or NULL.
+ * \param right Pointer to the location
+ *         where the left SP is to be stored, or NULL.
+ */
+inline void state_getSP ( int* left, int* right );
+
 
 /* ========================================================================== */
 #endif /* __ROBOT_STATE_H__ */
