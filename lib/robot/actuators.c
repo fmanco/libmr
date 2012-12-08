@@ -52,7 +52,8 @@ static int servoDegree = 0;
 
 /* ========================================================================== */
 
-static void motorsPI ( void );
+static void motorsUpdate ( void );
+static void motorsPI     ( void );
 
 
 /* ==========================================================================
@@ -80,7 +81,7 @@ void actuators_init ( void )
 
 void actuators_update ( void )
 {
-	motorsPI();
+	motorsUpdate();
 }
 
 void actuators_stop ( void )
@@ -191,6 +192,12 @@ void actuators_setLeds ( uint bitmap )
 
 
 /* ========================================================================== */
+
+static void motorsUpdate ( void )
+{
+	motorsPI();
+	state_setSP(spLeft, spRight);
+}
 
 static void motorsPI ( void )
 {
