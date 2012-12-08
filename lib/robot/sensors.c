@@ -297,6 +297,8 @@ static void updateBattery ( void )
 
 /* ===================
  * Schmitt Trigger like algorithm for handling binary sensors.
+ * \todo value should be a bool
+ * \todo maybe this should be moved to an utilities module
  */
 static inline void stBinSens ( uint value, bool* state, uint* count, uint threshold )
 {
