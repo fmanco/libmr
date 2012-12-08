@@ -47,6 +47,13 @@ static int odoIntRight  = 0;
  */
 static int battery = 0;
 
+/* ===================
+ * Bump sensor
+ */
+static bool bumpOn    = false;
+static int  bumpCount = 0;
+static int  bumpDir   = 0;
+
 
 /* ========================================================================== */
 
@@ -61,8 +68,9 @@ static int battery = 0;
 
 static void updateBeacon        ( void );
 static void updateGroundSensors ( void );
-static void updateBattery       ( void );
 static void updateOdometry      ( void );
+static void updateBattery       ( void );
+static void updateBump          ( void );
 
 static inline void stBinSens ( uint value, bool* state, uint* count, uint threshold );
 
@@ -93,6 +101,10 @@ void sensors_init ( void )
 	odoIntRight  = 0;
 
 	battery = 0;
+
+	bumpOn    = false;
+	bumpCount = 0;
+	bumpDir   = 0;
 }
 
 void sensors_update ( void )
@@ -104,6 +116,7 @@ void sensors_update ( void )
 	updateGroundSensors();
 	updateOdometry();
 	updateBattery();
+	updateBump();
 }
 
 void sensors_stop ( void )
@@ -224,6 +237,16 @@ uint sensors_battery ( void )
 
 
 /* ==========================================================================
+ * Bump detection
+ */
+
+bool sensors_bump ( void )
+{
+	return bumpOn;
+}
+
+
+/* ==========================================================================
  * Control buttons
  */
 
@@ -293,6 +316,20 @@ static void updateBattery ( void )
 	i = (i + 1) & 0x1F;
 
 	battery = (sum >> 5);
+}
+
+static void updateBump ( void )
+{
+	uint stuck   = 0;
+	uint spLeft  = 0;
+	uint spRight = 0;
+
+	state_getSP(&spLeft, &spRight);
+
+	stuck = (abs(spLeft  - odoIntLeft)  >= BUMP_THRESHOLD ||
+		     abs(spRight - odoIntRight) >= BUMP_THRESHOLD);
+
+	stBinSens(stuck, &bumpOn, &bumpCount, BUMP_ST_THRESHOLD);
 }
 
 /* ===================

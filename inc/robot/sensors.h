@@ -28,6 +28,8 @@
 
 #define GROUND_ST_THRESHOLD 5
 #define BEACON_ST_THRESHOLD 5
+#define BUMP_ST_THRESHOLD   5
+#define BUMP_THRESHOLD      3
 
 
 /* ==========================================================================
