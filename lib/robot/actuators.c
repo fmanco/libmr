@@ -92,10 +92,7 @@ void actuators_init ( void )
 
 	robot_setServo(0);
 
-	robot_resetLed(0);
-	robot_resetLed(1);
-	robot_resetLed(2);
-	robot_resetLed(3);
+	actuators_setLeds(0);
 }
 
 void actuators_update ( void )
@@ -112,10 +109,7 @@ void actuators_stop ( void )
 
 	robot_setServo(0);
 
-	robot_resetLed(0);
-	robot_resetLed(1);
-	robot_resetLed(2);
-	robot_resetLed(3);
+	actuators_setLeds(0);
 }
 
 
