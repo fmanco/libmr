@@ -7,7 +7,7 @@
  *  \brief Implement actuators interface.
  *
  *
- *  \version 0.1.0
+ *  \version 0.2.0
  *  \date    Dec 2012
  *
  *  \author Filipe Manco <filipe.manco@gmail.com>
