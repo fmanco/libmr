@@ -10,7 +10,7 @@
  *  even not be based on real sensors but derived from other sensors' values.
  *
  *  \version 0.1.0
- *  \date    Nov 2012
+ *  \date    Dec 2012
  *
  *  \author Filipe Manco <filipe.manco@gmail.com>
  */
@@ -26,9 +26,50 @@
  * Configuration values [can be changed]
  */
 
+/**
+ *  \brief Thresholds for the binary sensors filtering.
+ *
+ *  Some binary sensors are filtered using a Schmitt Trigger like algorithm.
+ *  Every define of the type <NAME>_ST_THRESHOLD is defining the threshold
+ *   for the <NAME> sensor.
+ *
+ *  For now this MACRO is only used for documentation purposes.
+ */
+#define ST_THRESHOLD
+
+/**
+ *  \brief The #ST_THRESHOLD for the ground detection.
+ *
+ *  An higher value means that the algorithm will perform slower,
+ *   what means, it will take more cycles to accept changes.
+ */
 #define GROUND_ST_THRESHOLD 5
+
+/**
+ *  \brief The #ST_THRESHOLD for the beacon detection.
+ *
+ *  An higher value means that the algorithm will perform slower,
+ *   what means, it will take more cycles to accept changes.
+ */
 #define BEACON_ST_THRESHOLD 5
+
+/**
+ *  \brief The #ST_THRESHOLD for the bump detection.
+ *
+ *  An higher value means that the algorithm will perform slower,
+ *   what means, it will take more cycles to accept changes.
+ */
 #define BUMP_ST_THRESHOLD   5
+
+/**
+ *  \brief Difference (in encoder ticks) between the value applied to the
+ *   motors and the value read from the encoders to be considered the
+ *   robot is stucked.
+ *
+ *  This is used when the robot has no bump detection sensor. In this
+ *   case the difference between the applied velocity and the read
+ *   velocity is used to determine when the robot is stucked.
+ */
 #define BUMP_THRESHOLD      3
 
 
