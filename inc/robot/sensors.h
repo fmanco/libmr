@@ -77,8 +77,28 @@
  * Management
  */
 
+/**
+ *  \brief Initalize the sensors module.
+ *
+ *  This function MUST be called before using this module. It is also
+ *   usefull for reseting the module.
+ */
 void sensors_init     ( void );
+
+/**
+ *  \brief Update the sensorial information available.
+ *
+ *  The necessary sensors reading and calculations are performed when
+ *   this function is called. This way the execution of this function
+ *   could take some time since reading sensors may be slow.
+ */
 void sensors_update   ( void );
+
+/**
+ *  \brief Stop the sensors module.
+ *
+ *  This includes disabling sensors to save battery life.
+ */
 void sensors_stop     ( void );
 
 
