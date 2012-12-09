@@ -137,9 +137,9 @@ void robot_init(void)
 	IPC2bits.T2IP = 1;
 	IEC0bits.T2IE = 1;      // Enable Timer 2 interrupts
 
-	robot_setServo(0); // \todo Don't call function
+	robot_setServo(0); /// \todo Don't call function
 
-	EnableInterrupts(); // \todo Move to the end of the function?
+	EnableInterrupts(); /// \todo Move to the end of the function?
 
 	/* ===================
 	 * IO Config
@@ -239,7 +239,7 @@ void inline robot_disableGroundSens ( void )
 
 void robot_readSensors ( void )
 {
-	static int channels[] = {0, 1, 2, 11}; // \todo Use defines for channels
+	static int channels[] = {0, 1, 2, 11}; /// \todo Use defines for channels
 
 	int i;
 

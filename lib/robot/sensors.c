@@ -61,7 +61,7 @@ static int  bumpDir   = 0;
  * Distance per encoder tick in  micrometers.
  * Micrometers are used because mm would probably lead to truncation.
  */
-#define ENC_DIST_PER_TICK ((WHEEL_CIRC * 1000) / ENC_TPR)  // \todo Check roundings
+#define ENC_DIST_PER_TICK ((WHEEL_CIRC * 1000) / ENC_TPR)  /// \todo Check roundings
 
 
 /* ========================================================================== */
@@ -334,9 +334,10 @@ static void updateBump ( void )
 
 /* ===================
  * Schmitt Trigger like algorithm for handling binary sensors.
- * \todo value should be a bool
- * \todo maybe this should be moved to an utilities module
  */
+
+/// \todo value should be a bool
+/// \todo maybe this should be moved to an utilities module
 static inline void stBinSens ( uint value, bool* state, uint* count, uint threshold )
 {
 	if (value) {

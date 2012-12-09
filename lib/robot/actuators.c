@@ -41,7 +41,7 @@ static int servoDegree = 0;
 /**
  *  \brief Defines the distance traveled by the robot per encoder tick.
  */
-#define ENC_DIST_PER_TICK ((WHEEL_CIRC * 1000) / ENC_TPR)  // \todo Check roundings
+#define ENC_DIST_PER_TICK ((WHEEL_CIRC * 1000) / ENC_TPR)  /// \todo Check roundings
 
 /**
  *  \brief The servo range.
@@ -97,7 +97,7 @@ void actuators_init ( void )
 
 void actuators_update ( void )
 {
-	// \todo Check if the module was previously initialized.
+	/// \todo Check if the module was previously initialized.
 
 	motorsUpdate();
 }
@@ -166,8 +166,8 @@ void actuators_setBeaconSens ( int degree )
 	pos = SERVO_DEGREE_TO_POS(servoDegree);
 	effectiveDegree = SERVO_POS_TO_DEGREE(pos);
 
-	/*  \todo This should be asynchronous
-	 *
+	/**
+	 *  \todo This should be asynchronous.
 	 *  The value should only be applied on the next actuators_update().
 	 *  Pay attention that servoDegree cannot be set
 	 *   beacause it is used by actuators_rotateBeaconSens().
@@ -179,8 +179,8 @@ void actuators_setBeaconSens ( int degree )
 
 void actuators_rotateBeaconSens ( int degree )
 {
-	/*  \todo This should be asynchronous
-	 *
+	/**
+	 *  \todo This should be asynchronous.
 	 *  The value should only be applied on the next actuators_update().
 	 */
 

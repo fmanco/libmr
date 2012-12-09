@@ -28,7 +28,7 @@ int main ( void )
 	 */
 	// mlogInfo(&log, "Initializing machinery ...");
 
-	// \todo: Initialization code goes here
+	/// \todo Initialization code goes here
 
 	// mlogInfo(&log, "Every systems up!");
 
@@ -49,7 +49,7 @@ int main ( void )
 		                           //  the last cycle actuation
 
 
-		// \todo Application code goes here
+		/// \todo Application code goes here
 
 
 		// lowlevel_implement();      // Implement low level behaviours
@@ -61,7 +61,7 @@ int main ( void )
 
 	// mlogInfo(&log, "Shuting down systems...");
 
-	// \todo: Stop code goes here
+	/// \todo Stop code goes here
 
 	// mlogInfo(&log, "Jerry is terminated!");
 

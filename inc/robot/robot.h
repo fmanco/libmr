@@ -34,7 +34,13 @@
 
 /* ===================
  * Library operation
- * \todo Comment on what this does exactly.
+ */
+/**
+ *  \brief Activate soft slope.
+ *
+ *  To active simply remove the #undef directive that follows the #define.
+ *
+ *  \todo Comment on what this does exactly.
  */
 #define SOFT_SLOPE
 #undef SOFT_SLOPE
@@ -103,7 +109,7 @@ typedef union {
 
 /* ========================================================================== */
 
-// \todo Check volatiles
+/// \todo Check volatiles
 volatile extern mrSens  sensors;
 volatile extern mrActs  actuators;
 volatile extern mrClock ticker;
