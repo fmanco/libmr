@@ -33,7 +33,8 @@ static int velRight = 0;
 /* ===================
  * Beacon servo
  */
-static int servoDegree = 0;
+static int servoDegree    = 0;
+static int newServoDegree = 0;
 
 
 /* ========================================================================== */
@@ -69,6 +70,7 @@ static int servoDegree = 0;
 /* ========================================================================== */
 
 static void motorsUpdate ( void );
+static void servoUpdate  ( void );
 static void motorsPI     ( void );
 
 
@@ -83,7 +85,8 @@ void actuators_init ( void )
 	velLeft  = 0;
 	velRight = 0;
 
-	servoDegree = 0;
+	servoDegree    = 0;
+	newServoDegree = 0;
 
 	robot_setVel2(0, 0);
 
@@ -100,6 +103,7 @@ void actuators_update ( void )
 	/// \todo Check if the module was previously initialized.
 
 	motorsUpdate();
+	servoUpdate();
 }
 
 void actuators_stop ( void )
@@ -158,32 +162,11 @@ void actuators_getVel ( int* left, int* right )
 
 void actuators_setBeaconSens ( int degree )
 {
-	int pos;
-	int effectiveDegree;
-
-	servoDegree = degree;
-
-	pos = SERVO_DEGREE_TO_POS(servoDegree);
-	effectiveDegree = SERVO_POS_TO_DEGREE(pos);
-
-	/**
-	 *  \todo This should be asynchronous.
-	 *  The value should only be applied on the next actuators_update().
-	 *  Pay attention that servoDegree cannot be set
-	 *   beacause it is used by actuators_rotateBeaconSens().
-	 */
-
-	robot_setServo(pos);
-	state_setServoDegree(effectiveDegree);
+	newServoDegree = degree;
 }
 
 void actuators_rotateBeaconSens ( int degree )
 {
-	/**
-	 *  \todo This should be asynchronous.
-	 *  The value should only be applied on the next actuators_update().
-	 */
-
 	actuators_setBeaconSens(servoDegree + degree);
 }
 
@@ -222,6 +205,20 @@ static void motorsUpdate ( void )
 {
 	motorsPI();
 	state_setSP(spLeft, spRight);
+}
+
+static void servoUpdate ( void )
+{
+	int pos;
+	int effectiveDegree;
+
+	pos = SERVO_DEGREE_TO_POS(newServoDegree);
+	effectiveDegree = SERVO_POS_TO_DEGREE(pos);
+
+	servoDegree = newServoDegree;
+
+	robot_setServo(pos);
+	state_setServoDegree(effectiveDegree);
 }
 
 static void motorsPI ( void )
