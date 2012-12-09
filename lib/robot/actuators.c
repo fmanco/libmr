@@ -8,7 +8,7 @@
  *
  *
  *  \version 0.1.0
- *  \date    Nov 2012
+ *  \date    Dec 2012
  *
  *  \author Filipe Manco <filipe.manco@gmail.com>
  */
@@ -38,14 +38,30 @@ static int servoDegree = 0;
 
 /* ========================================================================== */
 
+/**
+ *  \brief Defines the distance traveled by the robot per encoder tick.
+ */
 #define ENC_DIST_PER_TICK ((WHEEL_CIRC * 1000) / ENC_TPR)  // \todo Check roundings
 
+/**
+ *  \brief The servo range.
+ */
 #define SERVO_DEGREE_RANGE (SERVO_DEGREE_MAX - SERVO_DEGREE_MIN)
+
+/**
+ *  \brief The servo range in position.
+ */
 #define SERVO_POS_RANGE    (SERVO_POS_RIGHT - SERVO_POS_LEFT)
 
+/**
+ *  \brief Convert servo degree to servo position.
+ */
 #define SERVO_DEGREE_TO_POS(degree) \
 		(int) ((1.0 * SERVO_POS_RANGE / SERVO_DEGREE_RANGE) * degree)
 
+/**
+ *  \brief Convert servo position to servo degree.
+ */
 #define SERVO_POS_TO_DEGREE(pos) \
 		(int) (pos / (1.0 * SERVO_POS_RANGE / SERVO_DEGREE_RANGE))
 
