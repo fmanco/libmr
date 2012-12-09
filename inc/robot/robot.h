@@ -36,7 +36,8 @@
  * Library operation
  * \todo Comment on what this does exactly.
  */
-/* #define SOFT_SLOPE */
+#define SOFT_SLOPE
+#undef SOFT_SLOPE
 
 
 /* ========================================================================== */
