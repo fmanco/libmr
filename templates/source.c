@@ -8,7 +8,7 @@
  *
  *
  *  \version 0.1.0
- *  \date    Nov 2012
+ *  \date    Dec 2012
  *
  *  \author Filipe Manco <filipe.manco@gmail.com>
  */
