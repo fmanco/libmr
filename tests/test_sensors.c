@@ -14,8 +14,8 @@
  */
 
 #include <base.h>
-#include <robot/robot.h>
-#include <robot/sensors.h>
+#include <hal/robot.h>
+#include <mouse/sensors.h>
 
 
 /* ========================================================================== */

@@ -3,7 +3,7 @@
  * ========================================================================== */
 
 /**
- *  \file  inc/robot/conf.h
+ *  \file  inc/conf.h
  *  \brief This header provides robot dependent configurations.
  *
  *  This header file only provides values that are specific to each physical
@@ -24,8 +24,8 @@
  *  \author Filipe Manco <filipe.manco@gmail.com>
  */
 
-#ifndef __ROBOT_CONF_H__
-#define __ROBOT_CONF_H__
+#ifndef __CONF_H__
+#define __CONF_H__
 
 
 #include <base.h>
@@ -77,4 +77,4 @@
 
 
 /* ========================================================================== */
-#endif /* __ROBOT_CONF_H__ */
+#endif /* __CONF_H__ */

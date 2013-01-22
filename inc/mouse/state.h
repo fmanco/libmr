@@ -3,7 +3,7 @@
  * ========================================================================== */
 
 /**
- *  \file  inc/robot/state.h
+ *  \file  inc/mouse/state.h
  *  \brief This module allows for information exchange between
  *         the middleware, usually, between sensors and actuators modules.
  *
@@ -14,8 +14,8 @@
  *  \author Filipe Manco <filipe.manco@gmail.com>
  */
 
-#ifndef __ROBOT_STATE_H__
-#define __ROBOT_STATE_H__
+#ifndef __MOUSE_STATE_H__
+#define __MOUSE_STATE_H__
 
 
 #include <base.h>
@@ -63,4 +63,4 @@ inline void state_getSP ( int* left, int* right );
 
 
 /* ========================================================================== */
-#endif /* __ROBOT_STATE_H__ */
+#endif /* __MOUSE_STATE_H__ */

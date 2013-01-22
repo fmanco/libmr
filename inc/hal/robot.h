@@ -3,7 +3,7 @@
  * ========================================================================== */
 
 /**
- *  \file  inc/robot/robot.h
+ *  \file  inc/hal/robot.h
  *  \brief Implement basic operations on robot (like enabling/disabling sensors)
  *         and robot state database
  *
@@ -20,8 +20,8 @@
  *  \author Filipe Manco <filipe.manco@gmail.com>
  */
 
-#ifndef __ROBOT_ROBOT_H__
-#define __ROBOT_ROBOT_H__
+#ifndef __HAL_ROBOT_H__
+#define __HAL_ROBOT_H__
 
 
 #include <base.h>
@@ -167,4 +167,4 @@ void robot_resetLed          ( int ledNr );
 
 
 /* ========================================================================== */
-#endif /* __ROBOT_ROBOT_H__ */
+#endif /* __HAL_ROBOT_H__ */

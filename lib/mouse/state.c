@@ -3,7 +3,7 @@
  * ========================================================================== */
 
 /**
- *  \file  lib/robot/state.c
+ *  \file  lib/mouse/state.c
  *  \brief Implement the state exchange area.
  *
  *  This module is basically a set of shared
@@ -17,7 +17,7 @@
  */
 
 #include <base.h>
-#include <robot/state.h>
+#include <mouse/state.h>
 
 
 /* ========================================================================== */

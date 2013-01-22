@@ -3,7 +3,7 @@
  * ========================================================================== */
 
 /**
- *  \file  lib/robot/sensors.c
+ *  \file  lib/mouse/sensors.c
  *  \brief Implement sensors interface.
  *
  *  \version 0.1.0
@@ -13,10 +13,10 @@
  */
 
 #include <base.h>
-#include <robot/robot.h>
-#include <robot/sensors.h>
-#include <robot/conf.h>
-#include <robot/state.h>
+#include <mouse/sensors.h>
+#include <conf.h>
+#include <hal/robot.h>
+#include <mouse/state.h>
 
 
 /* ========================================================================== */
