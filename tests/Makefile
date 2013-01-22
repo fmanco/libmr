@@ -14,14 +14,19 @@
 INC = ../inc/
 LIB = $(shell find ../lib/ -name "*.c" -printf "%p ")
 
+TESTS = $(patsubst %.c, %, $(wildcard *.c))
+
 
 all:
 	@echo "USAGE: make <test_name>"
 	@echo "       make upload"
 	@echo "       make clean"
 
-%: %.c
-	CPATH=$(INC) pcompile $^ $(LIB)
+$(TESTS): %: %.hex
+	
+
+%.hex: %.c $(LIB)
+	CPATH=$(INC) pcompile $^
 
 upload:
 	ldpic32 -w $(patsubst %.c, %.hex, $(shell find *.hex))
