@@ -16,3 +16,5 @@
 
 - Generic
  - Implement utilities for servo and PI calibration
+ - Implement a logger
+ - Don't use pcompile
