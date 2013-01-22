@@ -14,8 +14,9 @@
  */
 
 #include <base.h>
-#include <hal/robot.h>
+#include <mouse/mouse.h>
 #include <mouse/actuators.h>
+#include <detpic32.h>
 
 
 /* ========================================================================== */
@@ -24,7 +25,7 @@ int main ( void )
 {
 	printStr("Test Actuators started!");
 
-	robot_init();
+	mouse_init();
 	actuators_init();
 
 	while (1) {
