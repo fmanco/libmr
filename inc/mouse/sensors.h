@@ -3,7 +3,7 @@
  * ========================================================================== */
 
 /**
- *  \file  inc/robot/sensors.h
+ *  \file  inc/mouse/sensors.h
  *  \brief Read robot sensors' values
  *
  *  The values provided by this library are already filtered and may
@@ -15,8 +15,8 @@
  *  \author Filipe Manco <filipe.manco@gmail.com>
  */
 
-#ifndef __ROBOT_SENSORS_H__
-#define __ROBOT_SENSORS_H__
+#ifndef __MOUSE_SENSORS_H__
+#define __MOUSE_SENSORS_H__
 
 
 #include <base.h>
@@ -218,4 +218,4 @@ bool sensors_stopBtn  ( void );
 
 
 /* ========================================================================== */
-#endif /* __ROBOT_SENSORS_H__ */
+#endif /* __MOUSE_SENSORS_H__ */

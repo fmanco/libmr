@@ -3,7 +3,7 @@
  * ========================================================================== */
 
 /**
- *  \file  inc/robot/actuators.h
+ *  \file  inc/mouse/actuators.h
  *  \brief Abstraction layer for robot actuation. Allows using of standard
  *         units, like degrees for servo rotation or m/s for wheels speed.
  *
@@ -14,8 +14,8 @@
  *  \author Filipe Manco <filipe.manco@gmail.com>
  */
 
-#ifndef __ROBOT_ACTUATORS_H__
-#define __ROBOT_ACTUATORS_H__
+#ifndef __MOUSE_ACTUATORS_H__
+#define __MOUSE_ACTUATORS_H__
 
 
 #include <base.h>
@@ -167,4 +167,4 @@ void actuators_setLeds ( uint bitmap );
 
 
 /* ========================================================================== */
-#endif /* __ROBOT_ACTUATORS_H__ */
+#endif /* __MOUSE_ACTUATORS_H__ */

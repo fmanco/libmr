@@ -14,8 +14,9 @@
  */
 
 #include <base.h>
-#include <robot/robot.h>
-#include <robot/sensors.h>
+#include <mouse/mouse.h>
+#include <mouse/sensors.h>
+#include <detpic32.h>
 
 
 /* ========================================================================== */
@@ -24,7 +25,7 @@ int main ( void )
 {
 	printStr("Test Sensors started!");
 
-	robot_init();
+	mouse_init();
 	sensors_init();
 
 	while (1) {

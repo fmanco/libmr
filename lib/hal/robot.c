@@ -3,7 +3,7 @@
  * ========================================================================== */
 
 /**
- *  \file  lib/robot/robot.c
+ *  \file  lib/hal/robot.c
  *  \brief Implement basic operations on robot (like enabling/disabling sensors)
  *         and robot state database
  *
@@ -15,8 +15,8 @@
  */
 
 #include <base.h>
-#include <robot/robot.h>
-#include <robot/conf.h>
+#include <hal/robot.h>
+#include <conf.h>
 #include <detpic32.h>
 
 

@@ -3,7 +3,7 @@
  * ========================================================================== */
 
 /**
- *  \file  lib/robot/actuators.c
+ *  \file  lib/mouse/actuators.c
  *  \brief Implement actuators interface.
  *
  *
@@ -14,10 +14,10 @@
  */
 
 #include <base.h>
-#include <robot/actuators.h>
-#include <robot/robot.h>
-#include <robot/conf.h>
-#include <robot/state.h>
+#include <mouse/actuators.h>
+#include <conf.h>
+#include <hal/robot.h>
+#include <mouse/state.h>
 
 
 /* ========================================================================== */
