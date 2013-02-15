@@ -19,6 +19,53 @@
 #include <mouse/state.h>
 
 
+/* ==========================================================================
+ * Configuration values [can be changed]
+ */
+
+/**
+ *  \brief Thresholds for the binary sensors filtering.
+ *
+ *  Some binary sensors are filtered using a Schmitt Trigger like algorithm.
+ *   Every #define of the type <NAME>_ST_THRESHOLD is defining the threshold
+ *   for the <NAME> sensor.
+ *
+ *  The threshold is defined in number of cycles.
+ *
+ *  An higher value means that the algorithm will perform slower,
+ *   what means, it will take more cycles to accept changes.
+ *
+ *  For now this macro #ST_THRESHOLD is only used to have this documentation.
+ */
+#define ST_THRESHOLD
+
+/**
+ *  \brief The #ST_THRESHOLD for the ground detection.
+ */
+#define GROUND_ST_THRESHOLD 5
+
+/**
+ *  \brief The #ST_THRESHOLD for the beacon detection.
+ */
+#define BEACON_ST_THRESHOLD 5
+
+/**
+ *  \brief The #ST_THRESHOLD for the bump detection.
+ */
+#define BUMP_ST_THRESHOLD   5
+
+/**
+ *  \brief Difference (in encoder ticks) between the value applied to the
+ *   motors and the value read from the encoders to be considered the
+ *   robot is stucked.
+ *
+ *  This is used when the robot has no bump detection sensor. In this
+ *   case the difference between the applied velocity and the read
+ *   velocity is used to determine when the robot is stucked.
+ */
+#define BUMP_THRESHOLD      3
+
+
 /* ========================================================================== */
 
 /* ===================

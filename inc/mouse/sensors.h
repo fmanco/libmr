@@ -4,13 +4,52 @@
 
 /**
  *  \file  inc/mouse/sensors.h
- *  \brief Read robot sensors' values
+ *  \brief Provide sensory information from the robot sensors.
  *
- *  The values provided by this library are already filtered and may
- *  even not be based on real sensors but derived from other sensors' values.
+ *  The sensors module is the responsible for providing you with the sensory
+ *   information from your robot.
  *
- *  \version 0.1.0
- *  \date    Dec 2012
+ *  This module assumes a robot with the following sensors:
+ *   - A beacon sensor on top of the robot: this is a sensor that
+ *     indicates if the beacon is visible or not, and also the angular
+ *     position of the beacon, relatively to the robot;
+ *   - Three obstacle sensors positioned in the front of the robot: this
+ *     sensors provide the distance to the closest obstacle in range. The
+ *     orientation of the sensors may differ depending on the device, but
+ *     usually there will be one pointing forward and two pointing left and
+ *     right at a determined angle;
+ *   - A ground sensor array: this array is composed by five sensors, usually
+ *     positioned in the front of the robot, that indicate wether the ground
+ *     bellow them is dark or not;
+ *   - An odometry module;
+ *   - A compass;
+ *   - A bump detection sensor that indicates if the robot is stuck;
+ *   - A battery sensor that provides information about the battery level.
+ *   - Two buttons, one called start button and other called stop button;
+ *
+ *  The real robot may not have all of this sensors. In that case, one of
+ *   two things may happen:
+ *   - The sensor readings are returned by the functions don't represent
+ *     anything (probably will allway be zero);
+ *   - The sensor information is derived from other sensors.
+ *
+ *  The robot can have more sensors than the ones presented above. That sensors
+ *   may be used to provide the information provided by this module, but are
+ *   not directly accessible through it.
+ *
+ *  To check wether a sensor really exists or not check the device
+ *   specific implementation.
+ *
+ *  The information provided by this module is properly processed, in order to:
+ *   - Filter the low level data removing noise;
+ *   - Convert units (to ones usable by humans);
+ *   - Create virtual sensors.
+ *
+ *  Finally, the reading of the sensors is performed only when the
+ *   sensors_update() function is called.
+ *
+ *  \version 0.4.0
+ *  \date    Feb 2013
  *
  *  \author Filipe Manco <filipe.manco@gmail.com>
  */
@@ -23,54 +62,20 @@
 
 
 /* ==========================================================================
- * Configuration values [can be changed]
+ * Constants
  */
 
 /**
- *  \brief Thresholds for the binary sensors filtering.
+ *  \brief Infinite value for obstacle sensors.
  *
- *  Some binary sensors are filtered using a Schmitt Trigger like algorithm.
- *  Every define of the type <NAME>_ST_THRESHOLD is defining the threshold
- *   for the <NAME> sensor.
+ *  \todo [LOW] Probably 1000 is not the best value.
  *
- *  For now this MACRO is only used for documentation purposes.
+ *  The obstacle sensors have a limited range. When nothing is visible
+ *   (within the range of the sensors) this value is returned by the
+ *   functions meaning that nothing is visible and so it is impossible
+ *   to know where the closest obstacle is.
  */
-#define ST_THRESHOLD
-
-/**
- *  \brief The #ST_THRESHOLD for the ground detection.
- *
- *  An higher value means that the algorithm will perform slower,
- *   what means, it will take more cycles to accept changes.
- */
-#define GROUND_ST_THRESHOLD 5
-
-/**
- *  \brief The #ST_THRESHOLD for the beacon detection.
- *
- *  An higher value means that the algorithm will perform slower,
- *   what means, it will take more cycles to accept changes.
- */
-#define BEACON_ST_THRESHOLD 5
-
-/**
- *  \brief The #ST_THRESHOLD for the bump detection.
- *
- *  An higher value means that the algorithm will perform slower,
- *   what means, it will take more cycles to accept changes.
- */
-#define BUMP_ST_THRESHOLD   5
-
-/**
- *  \brief Difference (in encoder ticks) between the value applied to the
- *   motors and the value read from the encoders to be considered the
- *   robot is stucked.
- *
- *  This is used when the robot has no bump detection sensor. In this
- *   case the difference between the applied velocity and the read
- *   velocity is used to determine when the robot is stucked.
- */
-#define BUMP_THRESHOLD      3
+#define OBST_SENS_INFINITE 1000
 
 
 /* ==========================================================================
@@ -80,140 +85,290 @@
 /**
  *  \brief Initalize the sensors module.
  *
- *  This function MUST be called before using this module. It is also
- *   usefull for reseting the module.
+ *  This function *MUST* be called before using this module. It is also
+ *   usefull for reseting the module in case you want to restart the robot.
  */
-void sensors_init     ( void );
+void sensors_init   ( void );
 
 /**
- *  \brief Update the sensorial information available.
+ *  \brief Update the sensory information.
  *
- *  The necessary sensors reading and calculations are performed when
- *   this function is called. This way the execution of this function
- *   could take some time since reading sensors may be slow.
+ *  This function updates the internal module sensory information by
+ *   by performing readings of the real sensors and the necessary
+ *   calculations.
+ *
+ *  It is the information collected (and calculated) by a call to
+ *   this function that is provided when you call a reading function
+ *   of this module.
+ *
+ *  Warning: A call to this function will trigger sensors readings
+ *   what will probably take some time. Also, a call to this function is
+ *   blocking, meaning only when all the information is collected (sensors
+ *   are read) and calculations made this function returns.
  */
-void sensors_update   ( void );
+void sensors_update ( void );
 
 /**
  *  \brief Stop the sensors module.
  *
  *  This includes disabling sensors to save battery life.
  */
-void sensors_stop     ( void );
+void sensors_stop   ( void );
 
 
 /* ==========================================================================
  * Obstacles detection
  */
 
-int  sensors_obstL     ( void );
-int  sensors_obstF     ( void );
-int  sensors_obstR     ( void );
+/**
+ *  \brief Provide the distance to the closest obstacle to the *left* sensor.
+ *
+ *  The distance is provided in cm.
+ *
+ *  If there are no objects within the range of the sensor the speciall
+ *   value #OBST_SENS_INFINITE is returned.
+ *
+ *  The information provided by this function is the one updated by the
+ *   last call to sensors_update(), what means that consecutive calls
+ *   to this function without calling sensors_update() will allways
+ *   return the same value.
+ *
+ *  \returns The distance to the closest obstacle to the left sensor in cm,
+ *            or #OBST_SENS_INFINITE.
+ */
+int  sensors_obstL ( void );
+
+/**
+ *  \brief Provide the distance to the closest obstacle to the *front* sensor.
+ *
+ *  The distance is provided in cm.
+ *
+ *  If there are no objects within the range of the sensor the speciall
+ *   value #OBST_SENS_INFINITE is returned.
+ *
+ *  The information provided by this function is the one updated by the
+ *   last call to sensors_update(), what means that consecutive calls
+ *   to this function without calling sensors_update() will allways
+ *   return the same value.
+ *
+ *  \returns The distance to the closest obstacle to the front sensor in cm,
+ *            or #OBST_SENS_INFINITE.
+ */
+int  sensors_obstF ( void );
+
+/**
+ *  \brief Provide the distance to the closest obstacle to the *right* sensor.
+ *
+ *  The distance is provided in cm.
+ *
+ *  If there are no objects within the range of the sensor the speciall
+ *   value #OBST_SENS_INFINITE is returned.
+ *
+ *  The information provided by this function is the one updated by the
+ *   last call to sensors_update(), what means that consecutive calls
+ *   to this function without calling sensors_update() will allways
+ *   return the same value.
+ *
+ *  \returns The distance to the closest obstacle to the right sensor in cm,
+ *            or #OBST_SENS_INFINITE.
+ */
+int  sensors_obstR ( void );
 
 
 /* ==========================================================================
  * Beacon search
  */
 
+/**
+ *  \brief Indicate wether the beacon is visible or not.
+ *
+ *  The information provided by this function is the one updated by the
+ *   last call to sensors_update(), what means that consecutive calls
+ *   to this function without calling sensors_update() will allways
+ *   return the same value.
+ *
+ *  \returns true if the beacon is visible and false otherwise.
+ */
 bool sensors_beacon    ( void );
+
+/**
+ *  \brief Provide the beacon direction.
+ *
+ *  The direction is given in degrees using the robot as the referencial.
+ *
+ *  \returns The beacon direction.
+ */
 int  sensors_beaconDir ( void );
 
 
 /* ==========================================================================
- * Target area and line detection (Ground sensors)
+ * Ground detection
  */
 
 /**
- * \brief Get the *left most* ground sensor state.
+ *  \brief Provide the *left most* ground sensor state.
  *
- * The value provided was properly filtered.
+ *  The value provided is properly filtered. The parameters used are:
+ *   - # GROUND_ST_THRESHOLD.
  *
- * \return true if the sensor is on and false otherwise
+ *  \returns true if the sensor is on and false otherwise.
  */
-bool sensors_groundL   ( void );
+bool sensors_groundL  ( void );
 
 /**
- * \brief Get the *center left* ground sensor state.
+ *  \brief Provide the *center left* ground sensor state.
  *
- * The value provided was properly filtered.
+ *  The value provided is properly filtered. The parameters used are:
+ *   - # GROUND_ST_THRESHOLD.
  *
- * \return true if the sensor is on and false otherwise
+ *  \returns true if the sensor is on and false otherwise.
  */
-bool sensors_groundCL  ( void );
+bool sensors_groundCL ( void );
 
 /**
- * \brief Get the *center front* ground sensor state.
+ *  \brief Provide the *center front* ground sensor state.
  *
- * The value provided was properly filtered.
+ *  The value provided is properly filtered. The parameters used are:
+ *   - # GROUND_ST_THRESHOLD.
  *
- * \return true if the sensor is on and false otherwise
+ *  \return true if the sensor is on and false otherwise.
  */
-bool sensors_groundCF  ( void );
+bool sensors_groundCF ( void );
 
 /**
- * \brief Get the *center right* ground sensor state.
+ *  \brief Provide the *center right* ground sensor state.
  *
- * The value provided was properly filtered.
+ *  The value provided is properly filtered. The parameters used are:
+ *   - # GROUND_ST_THRESHOLD.
  *
- * \return true if the sensor is on and false otherwise
+ *  \returns true if the sensor is on and false otherwise.
  */
-bool sensors_groundCR  ( void );
+bool sensors_groundCR ( void );
 
 /**
- * \brief Get the *right most* ground sensor state.
+ *  \brief Provide the *right most* ground sensor state.
  *
- * The value provided was properly filtered.
+ *  The value provided is properly filtered. The parameters used are:
+ *   - # GROUND_ST_THRESHOLD.
  *
- * \return true if the sensor is on and false otherwise
+ *  \returns true if the sensor is on and false otherwise.
  */
-bool sensors_groundR   ( void );
+bool sensors_groundR  ( void );
 
 /**
- * \brief Get the state of the center ground sesnsor using
- *        a combination of the three center sensors.
+ *  \brief Get the state of the center ground sesnsor.
  *
- * The values used by this function are properly filtered.
+ *  This information is provided using a combination of the three
+ *   center sensors. It considers the three sensors as one and indicates
+ *   the state of the majority of the sensors.
  *
- * \return true if at least two of the three center sensors
- *         are on and false otherwise
+ *  The values used by this function are properly filtered. The parameters are:
+ *   - # GROUND_ST_THRESHOLD
+ *
+ *  \returns true if the sensor is on and false otherwise. This basically
+ *           indicates the state of the majority of the three sensors.
  */
-bool sensors_groundC   ( void );
+bool sensors_groundC  ( void );
 
 
 /* ==========================================================================
- * Encoders and odometry
+ * Robot position and direction
  */
 
-void sensors_odoPart   ( int* odoL, int* odoR );
-void sensors_odoInt    ( int* odoL, int* odoR );
+/**
+ *  \brief Provides the position of the robot relative to the start position.
+ *
+ *  The X axis is the one with direction of 0 degrees, and the Y axis the one
+ *   with the direction of 90 degress.
+ *
+ *  The position can be determined in a lot of different ways, dependent on
+ *   the sensors available on the specific robot. The position can (and
+ *   probably is) an estimations so it can have a lot of error.
+ *
+ *  \returns The robot position relative to the start position.
+ */
+void sensors_position ( int* posX, int* posY );
+
+/**
+ *  \brief Provides the position of the robot relative to last reading.
+ *
+ *  This function differs from sensors_position() because it measures the
+ *   position relatively to the place the robot was the last time this function
+ *   was called.
+ *
+ *  The X axis is the one with direction of 0 degrees, and the Y axis the one
+ *   with the direction of 90 degress.
+ *
+ *  The position can be determined in a lot of different ways, dependent on
+ *   the sensors available on the specific robot. The position can (and
+ *   probably is) an estimations so it can have a lot of error.
+ *
+ *  \returns The robot position relative to the last reading.
+ */
+void sensors_movement ( int* posX, int* posY );
+
+/**
+ *  \brief Provides the direction of the robot.
+ *
+ *  The reference depends upon the robot. It is usually North but can also
+ *   be the robot start orientation or any other.
+ *
+ *  \returns The direction of the robot in degrees.
+ */
+int  sensors_compass  ( void );
 
 
 /* ==========================================================================
- * Compass (simulated)
+ * Battery state
  */
 
-int  sensors_compass   ( void );
-
-
-/* ==========================================================================
- * Battery level
+/**
+ *  \brief Provides the battery level.
+ *
+ *  The value is given in percentage.
+ *
+ *  \returns The level of the battery in percentage.
  */
-
-uint sensors_battery   ( void );
+uint sensors_battery ( void );
 
 
 /* ==========================================================================
  * Bump detection
  */
 
-bool sensors_bump      ( void );
+/**
+ *  \briefs Indicates whether the robot hit something.
+ *
+ *  This function returns true during all the time the robot is hitting
+ *   something. Is usefull to know if the robot is stuck.
+ *
+ *  \returns True if the robot is hitting something and false otherwise.
+ */
+bool sensors_bump ( void );
 
 
 /* ==========================================================================
  * Control buttons
  */
 
+/**
+ *  \brief Provides the state of the start button.
+ *
+ *  Start is only the name of the button. It's real function is undefined
+ *   and depends on how you use it.
+ *
+ *  \returns True if the button is pressed, and false otherwise.
+ */
 bool sensors_startBtn ( void );
+
+/**
+ *  \brief Provides the state of the stop button.
+ *
+ *  Stop is only the name of the button. It's real function is undefined
+ *   and depends on how you use it.
+ *
+ *  \returns True if the button is pressed, and false otherwise.
+ */
 bool sensors_stopBtn  ( void );
 
 
