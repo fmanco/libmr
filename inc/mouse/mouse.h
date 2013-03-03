@@ -3,14 +3,14 @@
  * ========================================================================== */
 
 /**
- *  \file  mouse.h
+ *  \file  inc/mouse/mouse.h
  *  \brief Provide generic low level functions.
  *
- *  This module provides low level functions like robot initialization
- *   or a timer.
+ *  This module provides low level functions like robot initialization,
+ *   robot reset and timers.
  *
- *  \version 0.3.0
- *  \date    Jan 2013
+ *  \version 0.4.0
+ *  \date    Feb 2013
  *
  *  \author Filipe Manco <filipe.manco@gmail.com>
  */
@@ -27,8 +27,8 @@
 /**
  *  \brief Initialize all necessary systems to use the robot.
  *
- *  This function must be called before any robot operation, i.e., before
- *   almost any other function from mrlib library.
+ *  This function *must be called* before any robot operation, i.e., before
+ *   almost any other function from libmr library.
  */
 void mouse_init ( void );
 
@@ -40,34 +40,30 @@ void mouse_init ( void );
 /**
  *  \brief Wait for the next 10ms tick
  *
- *  The wait is done be pooling. After the waiting
- *   the correspondent timer flag is cleared.
+ *  The wait is done by pooling.
  */
-inline void waitStep10ms ( void );
+inline void mouse_waitStep10ms ( void );
 
 /**
  *  \brief Wait for the next 20ms tick
  *
- *  The wait is done be pooling. After the waiting
- *   the correspondent timer flag is cleared.
+ *  The wait is done by pooling.
  */
-inline void waitStep20ms ( void );
+inline void mouse_waitStep20ms ( void );
 
 /**
  *  \brief Wait for the next 40ms tick
  *
- *  The wait is done be pooling. After the waiting
- *   the correspondent timer flag is cleared.
+ *  The wait is done by pooling.
  */
-inline void waitStep40ms ( void );
+inline void mouse_waitStep40ms ( void );
 
 /**
  *  \brief Wait for the next 80ms tick
  *
- *  The wait is done be pooling. After the waiting
- *   the correspondent timer flag is cleared.
+ *  The wait is done by pooling.
  */
-inline void waitStep80ms ( void );
+inline void mouse_waitStep80ms ( void );
 
 
 /* ========================================================================== */
